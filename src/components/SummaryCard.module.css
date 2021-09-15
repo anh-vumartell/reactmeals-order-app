@@ -1,0 +1,41 @@
+.summary-card h3 {
+  color: var(--primary-font-color);
+}
+.summary-card ul {
+  list-style-type: none;
+  padding: 0 0.6rem;
+}
+.summary-card li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.summary-card .price-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.summary-card .price {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.summary-card .amount {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--neutral-color);
+  padding: 0.2rem 0.5rem;
+}
+.summary-card .actions button {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0.3rem;
+  width: 2.5rem;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+}

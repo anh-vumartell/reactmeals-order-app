@@ -1,0 +1,15 @@
+.introduction {
+  color: var(--primary-font-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.introduction h2 {
+  margin: 0 2rem;
+}
+.introduction p {
+  line-height: 1.5rem;
+  margin: 1.5rem 2rem;
+}

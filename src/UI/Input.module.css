@@ -1,0 +1,14 @@
+label {
+  font-weight: 600;
+}
+input {
+  display: inline-block;
+  width: 2rem;
+  height: 1.3rem;
+  margin: 0 0.3rem;
+  border-color: #ccc;
+  border-radius: 6px;
+}
+input:focus {
+  outline: none;
+}

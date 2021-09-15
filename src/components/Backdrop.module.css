@@ -1,0 +1,9 @@
+.backdrop {
+  width: 100%;
+  min-height: 25rem;
+  margin: 3rem 0;
+  background-image: url(../images/backdrop.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
