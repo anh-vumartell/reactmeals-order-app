@@ -7,14 +7,67 @@ import CartContext from "./cart-context";
 const defaultCartState = { items: [], totalAmount: 0 };
 
 const cartReducer = (state, action) => {
+  //WHEN ADDING AN ITEM
   if (action.type === "ADD_ITEM") {
-    const updatedItems = state.items.concat(action.item);
-    console.log(updatedItems);
+    //Find index of action.item
+    const existingItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    //Access the existingItem with index
+    const existingCartItem = state.items[existingItemIndex];
+
+    let updatedItems;
+
+    if (existingCartItem) {
+      //using spread operator not to mutate the current array
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+
+      updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+    } else {
+      //item is added for the first time, we concat it to the current array
+      updatedItems = state.items.concat(action.item);
+    }
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
-    console.log(updatedTotalAmount);
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
+
+  //WHEN REMOVING AN ITEM
+  if (action.type === "REMOVE_ITEM") {
+    //Step 1: Find the index of the item we want to remove: findIndex()
+    const indexOfCurrentItem = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    console.log(indexOfCurrentItem);
+    //Step 2: Access the item with the above index
+    const currentItem = state.items[indexOfCurrentItem];
+    //Step 3: Calculate the total amount after decreasing
+    const updatedTotalAmount = state.totalAmount - currentItem.price;
+
+    let updatedItems;
+
+    //Step 4: Check currentItem.amount: 2 scenarios
+    //current.amount === 1 , remove the item by using filter()
+    //current.amount > 1, decrease the amount by 1
+    if (currentItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    }
+    if (currentItem.amount > 1) {
+      const updatedCurrentItem = {
+        ...currentItem,
+        amount: currentItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[indexOfCurrentItem] = updatedCurrentItem;
+    }
+
+    return { items: updatedItems, totalAmount: updatedTotalAmount };
+  }
+
   return defaultCartState;
 };
 //A CartProvider Component
@@ -29,6 +82,7 @@ function CartProvider(props) {
   const removeItemFromCart = (id) => {
     dispatchCartAction({ type: "REMOVE_ITEM", id: id });
   };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,

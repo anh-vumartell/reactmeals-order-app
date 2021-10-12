@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./App.css";
 import HeroSection from "./components/HeroSection";
 import Header from "./UI/Header";
-import Backdrop from "./components/Backdrop";
+import HeroImage from "./components/HeroImage";
 import Introduction from "./components/Introduction";
 import MealGrid from "./components/MealGrid";
-import CartModal from "./components/CartModal";
+import Modal from "./components/Modal";
 import CartProvider from "./store/CartProvider";
 const meals = [
   {
@@ -67,14 +67,13 @@ function App() {
 
   return (
     <CartProvider>
-      {isShown && <CartModal onCloseModal={closeModal} />}
+      {isShown && <Modal isVisible={isShown} onCloseModal={closeModal} />}
 
       <HeroSection>
         <Header onOpenModal={openModal} />
-        <Backdrop />
+        <HeroImage />
         <Introduction />
       </HeroSection>
-      {/* <AddToCart /> */}
       <MealGrid meals={meals} />
     </CartProvider>
   );

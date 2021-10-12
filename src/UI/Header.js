@@ -17,8 +17,8 @@ function Header(props) {
         <span>
           <img src={cartlogo} alt="" />
         </span>
-        <button>Your Cart</button>
-        <span>{numberOfCartItems}</span>
+        <span>Your Cart</span>
+        <span className={classes.badge}>{numberOfCartItems}</span>
       </button>
     </div>
   );

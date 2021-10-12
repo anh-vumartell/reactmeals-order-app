@@ -11,7 +11,7 @@ function Meal(props) {
     e.persist();
     setEnteredAmount(e.target.value);
   };
-  console.log(enteredAmount);
+
   //function to handler the input amount
   const submitHandler = (e) => {
     e.preventDefault();
