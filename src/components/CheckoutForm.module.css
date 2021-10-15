@@ -1,0 +1,103 @@
+.form-checkout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px solid var(--primary-font-color);
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-container h3 {
+  color: var(--primary-font-color);
+  font-size: 1.5rem;
+}
+
+.form-control__checkout {
+  /*reset default style*/
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 0px;
+  border-color: #ccc;
+  border-style: none none solid none;
+  transition: all 0.5s;
+  padding: 0.5rem;
+  width: auto;
+}
+.form-control__checkout::placeholder {
+  color: transparent;
+}
+.form-control__checkout:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: var(--primary-color);
+}
+.form-control__checkout:focus + .form-label__checkout,
+.form-control__checkout:not(:placeholder-shown) + .form-label__checkout {
+  transform: translateY(-2.8em) scale(0.8);
+  color: var(--primary-font-color);
+}
+.form-group:focus-within {
+  transform: scale(1.05, 1.05);
+}
+
+.form-label__checkout {
+  display: block;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+  opacity: 1;
+  transform: translateY(-2em);
+  transform-origin: 0 0; /*the animation happens at the top left*/
+  transition: all 0.3s;
+}
+
+.card-list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.card-date {
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  grid-template-rows: repeat(2, 50px);
+  gap: 1.5rem;
+}
+.card-date .form-control__checkout {
+  width: 6rem;
+}
+
+.btn-checkout,
+.btn-cancel {
+  width: 90%;
+  margin: 0.5rem;
+  padding: 0.6rem;
+  border-color: var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-font-color);
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease-in;
+}
+
+.btn-checkout:hover,
+.btn-cancel:hover {
+  background-color: var(--primary-color);
+}
+
+@media only screen and (min-width: 768px) {
+  .form-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .form-group {
+    margin: 1rem;
+  }
+}

@@ -1,10 +1,10 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./Meal.module.css";
 import Input from "../UI/Input";
 import CartContext from "../store/cart-context";
 function Meal(props) {
   const [enteredAmount, setEnteredAmount] = useState(1);
-  const inputRef = useRef();
+  // const inputRef = useRef();
   const cartCtx = useContext(CartContext);
 
   const inputHandler = (e) => {
@@ -15,7 +15,7 @@ function Meal(props) {
   //function to handler the input amount
   const submitHandler = (e) => {
     e.preventDefault();
-    setEnteredAmount(inputRef.current.value); //always a string
+    // setEnteredAmount(inputRef.current.value); //always a string
   };
   //Function to add to cart
   const addToCartHandler = () => {
@@ -47,9 +47,8 @@ function Meal(props) {
             value={enteredAmount}
             onChange={inputHandler}
             id={props.id}
-            ref={inputRef}
             label="Amount"
-            input={{ defaultValue: "1", min: "1", max: "5", type: "number" }}
+            input={{ min: "1", max: "5", type: "number" }}
           />
         </form>
         <button type="submit" onClick={addToCartHandler}>

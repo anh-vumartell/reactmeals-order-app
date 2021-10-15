@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./App.css";
 import HeroSection from "./components/HeroSection";
 import Header from "./UI/Header";
@@ -7,55 +7,50 @@ import Introduction from "./components/Introduction";
 import MealGrid from "./components/MealGrid";
 import Modal from "./components/Modal";
 import CartProvider from "./store/CartProvider";
-const meals = [
-  {
-    id: 1,
-    dish: "Japanese Gyozas",
-    cuisine: "Japanese",
-    category: "starter",
-    price: 12.49,
-    imageUrl: "./images/japanese-gyozas.jpg",
-  },
-  {
-    id: 2,
-    dish: "Avocado Sandwich",
-    cuisine: "International",
-    category: "salads",
-    price: 9.45,
-  },
-  {
-    id: 3,
-    dish: "Surf & Turf Burger",
-    cuisine: "American",
-    category: "dinner",
-    price: 12.9,
-  },
-  {
-    id: 4,
-    dish: "Pizza a la Genovese",
-    cuisine: "Italian",
-    category: "pizza",
-    price: 18.5,
-  },
-  {
-    id: 5,
-    dish: "Butter chicken",
-    cuisine: "Indian",
-    category: "dinner",
-    price: 16.49,
-  },
-  {
-    id: 6,
-    dish: "Chocolate Brownie",
-    cuisine: "American",
-    category: "dessert",
-    price: 3.5,
-  },
-];
 
 function App() {
   //state initialization
   const [isShown, setIsShown] = useState(false);
+  const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
+  //function to handle data fetching
+  const fetchMealsHandler = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        "https://react-meals-cbcd5-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      // console.log(response);
+      const mealsData = await response.json();
+      // console.log(mealsData);
+      const mealsArr = Object.entries(mealsData);
+      // console.log(mealsArr);
+      const transformedData = mealsArr.map((meal) => {
+        return {
+          id: meal[0],
+          dish: meal[1].dish,
+          category: meal[1].category,
+          cuisine: meal[1].cuisine,
+          price: meal[1].price,
+        };
+      });
+      console.log(transformedData);
+      setMeals(transformedData);
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      setError(err.message);
+      console.log(err.message);
+    }
+  }, []);
+  useEffect(() => {
+    fetchMealsHandler();
+  }, [fetchMealsHandler]);
 
   const openModal = () => {
     setIsShown(true);
@@ -65,16 +60,26 @@ function App() {
     setIsShown(false);
   };
 
+  let content = "Found no meals";
+  if (meals.length > 0) {
+    content = <MealGrid meals={meals} />;
+  }
+  if (error) {
+    content = <p className="error-text">{`${error}!!!`}</p>;
+  }
+  if (isLoading) {
+    content = <p className="loading-text">Loading...</p>;
+  }
   return (
     <CartProvider>
-      {isShown && <Modal isVisible={isShown} onCloseModal={closeModal} />}
+      {isShown && <Modal onCloseModal={closeModal} />}
 
       <HeroSection>
         <Header onOpenModal={openModal} />
         <HeroImage />
         <Introduction />
       </HeroSection>
-      <MealGrid meals={meals} />
+      <section>{content}</section>
     </CartProvider>
   );
 }

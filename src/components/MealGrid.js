@@ -13,7 +13,6 @@ function MealGrid(props) {
             category={meal.category}
             cuisine={meal.cuisine}
             price={meal.price}
-            imageUrl={meal.imageUrl}
           />
         );
       })}

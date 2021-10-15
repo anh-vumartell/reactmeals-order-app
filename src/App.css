@@ -27,7 +27,18 @@
 .App-link {
   color: #61dafb;
 }
-
+.loading-text {
+  text-align: center;
+  color: var(--primary-font-color);
+  font-size: 2rem;
+  font-family: inherit;
+}
+.error-text {
+  text-align: center;
+  color: red;
+  font-size: 2rem;
+  font-family: inherit;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

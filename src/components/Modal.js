@@ -11,7 +11,7 @@ function Modal(props) {
         portalElement
       )}
       {ReactDOM.createPortal(
-        <Cart isVisible={props.isVisible} onCloseModal={props.onCloseModal} />,
+        <Cart onCloseModal={props.onCloseModal} />,
         portalElement
       )}
     </Fragment>
