@@ -4,6 +4,7 @@
   align-items: center;
   padding: 1.5rem;
   border: 2px solid var(--primary-font-color);
+  animation: slide-down 400ms ease-out forwards;
 }
 .form-container {
   display: flex;
@@ -14,18 +15,29 @@
 .form-container h3 {
   color: var(--primary-font-color);
   font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-group:focus-within {
+  transform: scale(1.02, 1.02);
+}
+.form-field {
+  position: relative;
+  margin: 0.6rem;
 }
 
 .form-control__checkout {
   /*reset default style*/
   box-shadow: none;
-  background-color: rgba(0, 0, 0, 0.02);
+  /* background-color: rgba(0, 0, 0, 0.02); */
+  background-color: transparent;
   border-radius: 0px;
   border-color: #ccc;
   border-style: none none solid none;
   transition: all 0.5s;
-  padding: 0.5rem;
+  padding: 0.3rem;
   width: auto;
+  height: 1rem;
 }
 .form-control__checkout::placeholder {
   color: transparent;
@@ -37,21 +49,20 @@
 }
 .form-control__checkout:focus + .form-label__checkout,
 .form-control__checkout:not(:placeholder-shown) + .form-label__checkout {
-  transform: translateY(-2.8em) scale(0.8);
+  transform: translateY(-3em) scale(0.8);
   color: var(--primary-font-color);
-}
-.form-group:focus-within {
-  transform: scale(1.05, 1.05);
 }
 
 .form-label__checkout {
   display: block;
   font-size: 1em;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+
+  /* margin-bottom: 0.5rem; */
   color: #ccc;
   opacity: 1;
-  transform: translateY(-2em);
+  margin-top: 0.2rem;
+  transform: translateY(-3em) translateX(0.5em);
   transform-origin: 0 0; /*the animation happens at the top left*/
   transition: all 0.3s;
 }
@@ -90,7 +101,31 @@
 .btn-cancel:hover {
   background-color: var(--primary-color);
 }
+.btn-checkout:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  display: block;
+  position: absolute;
+  top: 1.8rem;
+  right: 2.6rem;
+}
 
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 @media only screen and (min-width: 768px) {
   .form-container {
     flex-direction: row;

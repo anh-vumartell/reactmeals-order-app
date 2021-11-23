@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Input.module.css";
 const Input = React.forwardRef((props, ref) => (
-  <div className={classes.input}>
+  <fieldset className={classes.input}>
     <label htmlFor={props.label}>{props.label}</label>
     <input
       id={props.id}
@@ -10,7 +10,7 @@ const Input = React.forwardRef((props, ref) => (
       onChange={props.onChange}
       value={props.value}
     />
-  </div>
+  </fieldset>
 ));
 
 export default Input;

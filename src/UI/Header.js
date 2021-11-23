@@ -13,11 +13,11 @@ function Header(props) {
   return (
     <div className={classes.header}>
       <h1>ReactMeals</h1>
+      <span>Menu</span>
+      <span>Log in</span>
+      <span>Contact</span>
       <button className={classes.cart} onClick={props.onOpenModal}>
-        <span>
-          <img src={cartlogo} alt="" />
-        </span>
-        <span>Your Cart</span>
+        <img src={cartlogo} alt="" />
         <span className={classes.badge}>{numberOfCartItems}</span>
       </button>
     </div>

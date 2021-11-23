@@ -3,16 +3,17 @@
   padding: 1.5rem 1rem;
   margin: 0.5rem 0;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border: 2px solid var(--primary-font-color);
   border-radius: 8px;
 }
-.meal-card .card-col-right {
+/* .meal-card .card-col-right {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-content: center;
 }
 .meal-card .card-col-left {
   display: grid;
@@ -20,7 +21,7 @@
   justify-content: flex-start;
   justify-items: left;
   align-items: flex-start;
-}
+} */
 
 .meal-card span {
   padding: 0.4rem 0.3rem;
@@ -37,8 +38,7 @@
   background-color: var(--primary-color);
   box-shadow: 3px 8 px 15px rgba(0, 0, 0.3, 0.2);
   border: none;
-  width: 4rem;
-  height: 1.5rem;
+  padding: 0.5rem;
   border-radius: 50px;
   color: var(--primary-font-color);
   font-weight: 600;
@@ -47,11 +47,35 @@
 .meal-card h4 {
   color: var(--primary-color);
 }
+
 .meal-card .meal-tags__category {
   background-color: #51cf66;
 }
 .meal-card .meal-tags__cuisine {
   background-color: #ffd43b;
+}
+.form-add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-add label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.form-add input {
+  background-color: transparent;
+  color: var(--primary-color);
+  font-weight: 600;
+  display: inline-block;
+  width: 3rem;
+  height: 2rem;
+  margin: 0 1rem;
+  border-color: var(--primary-color);
+  border-radius: 10px;
+}
+.form-add input:focus {
+  outline: none;
 }
 @media only screen and (min-width: 768px) {
   .meal-card {

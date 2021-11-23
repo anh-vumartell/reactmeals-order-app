@@ -5,7 +5,7 @@ import Header from "./UI/Header";
 import HeroImage from "./components/HeroImage";
 import Introduction from "./components/Introduction";
 import MealGrid from "./components/MealGrid";
-import Modal from "./components/Modal";
+import Modal from "./UI/Modal";
 import CartProvider from "./store/CartProvider";
 
 function App() {
@@ -37,9 +37,10 @@ function App() {
           category: meal[1].category,
           cuisine: meal[1].cuisine,
           price: meal[1].price,
+          imgURL: meal[1].imgURL,
         };
       });
-      console.log(transformedData);
+      // console.log(transformedData);
       setMeals(transformedData);
       setIsLoading(false);
     } catch (err) {
@@ -72,7 +73,7 @@ function App() {
   }
   return (
     <CartProvider>
-      {isShown && <Modal onCloseModal={closeModal} />}
+      {isShown && <Modal show={isShown} onCloseModal={closeModal} />}
 
       <HeroSection>
         <Header onOpenModal={openModal} />

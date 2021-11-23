@@ -30,6 +30,7 @@ const cartReducer = (state, action) => {
     } else {
       //item is added for the first time, we concat it to the current array
       updatedItems = state.items.concat(action.item);
+      // console.log(updatedItems);
     }
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
@@ -68,6 +69,9 @@ const cartReducer = (state, action) => {
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
 
+  if (action.type === "CLEAR") {
+    return defaultCartState;
+  }
   return defaultCartState;
 };
 //A CartProvider Component
@@ -82,12 +86,15 @@ function CartProvider(props) {
   const removeItemFromCart = (id) => {
     dispatchCartAction({ type: "REMOVE_ITEM", id: id });
   };
-
+  const clearCart = () => {
+    dispatchCartAction({ type: "CLEAR" });
+  };
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
+    clearCart: clearCart,
   };
   return (
     <CartContext.Provider value={cartContext}>
